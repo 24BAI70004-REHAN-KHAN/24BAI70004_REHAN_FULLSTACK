@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Profile App</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React + ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Babel (to support JSX in browser) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Your React Code -->
+  <script type="text/babel">
+    const { useState } = React;
+
+    function UserProfile({ username }) {
+      return (
+        <div style={{ padding: '10px', border: '1px solid blue' }}>
+          <h3>User Profile</h3>
+          <p>Username: <strong>{username}</strong></p>
+        </div>
+      );
+    }
+
+    function AppHeader({ username }) {
+      return (
+        <header style={{ padding: '10px', backgroundColor: '#f0f0f0', marginBottom: '20px' }}>
+          <h1>My App</h1>
+          <UserProfile username={username} />
+        </header>
+      );
+    }
+
+    function App() {
+      const [username, setUsername] = useState('john_doe');
+
+      return (
+        <div style={{ padding: '20px' }}>
+          <AppHeader username={username} />
+
+          <div style={{ marginTop: '20px' }}>
+            <label>
+              Change Username:
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                style={{ marginLeft: '10px', padding: '5px' }}
+              />
+            </label>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
